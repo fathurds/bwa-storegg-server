@@ -9,7 +9,6 @@ const Transaction = require('../transaction/model');
 const path = require('path');
 const fs = require('fs');
 const config = require('../../config');
-const { nextTick } = require('process');
 
 module.exports = {
     landingPage: async (req, res) => {
@@ -81,7 +80,7 @@ module.exports = {
             if (!resBank) return res.status(404).json({ message: 'Bank tidak ditemukan' });
 
             let tax = (10 / 100) * resNominal._doc.price;
-            let value = resNominal._doc.price - tax;
+            let value = resNominal._doc.price + tax;
 
             const payload = {
                 historyVoucherTopup: {
